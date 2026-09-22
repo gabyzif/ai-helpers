@@ -16,10 +16,11 @@ Podés decir “Hablame en español mexicano”, “Usá español argentino y vo
 
 ## Paquetes y plataformas
 
+- `dist/chatgpt/`: Markdown autocontenido para pegar en Custom Instructions globales de ChatGPT; la edición `general` es la recomendada. Dentro de Projects, copiá la edición elegida en las instrucciones del Project porque estas reemplazan las globales.
 - `dist/claude/`: skills ZIP para Claude web/desktop.
 - `dist/gemini/`: ediciones para importar como conocimiento de un Gem.
 - `dist/universal/`: fallback para cualquier IA con instrucciones y archivos.
-- `plugins/ai-helpers/`: scaffold del plugin para ChatGPT/Codex compatibles.
+- `plugins/ai-helpers/`: scaffold del plugin local para Codex compatibles, no para ChatGPT web.
 - `package.json` + `.agents/skills/`: descubrimiento en Pi y repositorios de trabajo.
 - `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` y `.github/copilot-instructions.md`: adaptadores breves.
 

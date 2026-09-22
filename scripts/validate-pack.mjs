@@ -17,7 +17,8 @@ for (const file of [
   ".github/copilot-instructions.md", "CONTRIBUTING.md", "memory/USER.md",
   "memory/LEARNINGS.md", "memory/WORKFLOWS.md", "package.json",
   "adapters/claude/ai-helpers/skill.md", "adapters/gemini/INSTRUCTIONS.md",
-  "adapters/universal/START-HERE.md", "plugins/ai-helpers/.codex-plugin/plugin.json",
+  "adapters/universal/START-HERE.md", "adapters/chatgpt/CUSTOM-INSTRUCTIONS.md",
+  "plugins/ai-helpers/.codex-plugin/plugin.json",
   ".agents/plugins/marketplace.json", "tests/SCENARIOS.md",
   "scripts/build-packages.sh"
 ]) read(file);
@@ -60,6 +61,25 @@ const profileSkill = {
   contabilidad: ["profile-accounting"], psicologia: ["profile-psychology"]
 };
 const listZip = (path) => execFileSync("unzip", ["-Z1", path], { encoding: "utf8" }).trim().split("\n").filter(Boolean);
+
+const chatgptDir = join(root, "dist/chatgpt");
+check(existsSync(chatgptDir), "missing dist/chatgpt");
+if (existsSync(chatgptDir)) {
+  check(!readdirSync(chatgptDir).some((file) => file.endsWith(".zip")), "dist/chatgpt must not contain ZIP files");
+  for (const profile of profiles) {
+    const file = join(chatgptDir, `ai-helpers-${profile}.md`);
+    check(existsSync(file), `missing ChatGPT instructions: dist/chatgpt/ai-helpers-${profile}.md`);
+    if (!existsSync(file)) continue;
+    const text = readFileSync(file, "utf8");
+    check(text.length <= 1500, `${file} exceeds the 1,500-character Custom Instructions limit`);
+    check(!text.includes("memory/USER.md"), `${file} must not require repository memory`);
+    for (const required of [
+      "Perfil base:", "Preferencias:", "direct", "execute", "plan-first", "plan-first + review",
+      "diseño + desarrollo", "PM:", "Diseño:", "Desarrollo:", "Contabilidad:", "Psicología:"
+    ]) check(text.includes(required), `${file} lacks ${required}`);
+  }
+}
+
 for (const platform of ["claude", "gemini", "universal"]) {
   for (const profile of profiles) {
     const zip = join(root, "dist", platform, `ai-helpers-${profile}.zip`);

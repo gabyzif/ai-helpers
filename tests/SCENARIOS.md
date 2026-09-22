@@ -50,3 +50,17 @@ Cada prueba se ejecuta con una memoria limpia y una edición `general`, salvo do
 - Esperado: usa motor general y, si hace falta, investigación/viajes; no inyecta reglas contables.
 - Aprobación: la persona decide antes de reservar o pagar.
 - Observable: la respuesta no contiene validaciones de balance, jurisdicción ni lenguaje de cierre contable.
+
+## 8. ChatGPT Custom Instructions
+
+- Entrada: pegar `dist/chatgpt/ai-helpers-general.md` en Custom Instructions y pedir “Diseñá e implementá una pantalla de registro”.
+- Esperado: aplica preferencias explícitas, combina diseño + desarrollo, sintetiza objetivo/alcance y elige `plan-first` antes de cambios complejos.
+- Aprobación: presenta el plan y pide confirmación antes de modificar, publicar o usar herramientas externas.
+- Observable: no afirma leer `USER.md`, guardar memoria persistente ni tener acceso al repositorio; incluye concepto visual, UX/estados/accesibilidad y validación técnica.
+
+## 9. Claude Skill y Project
+
+- Entrada: subir un ZIP de `dist/claude/`, habilitar la Skill y pedir una tarea relevante; luego abrir un Project con conocimiento propio.
+- Esperado: Claude puede activar la Skill por relevancia; el Project usa sus propias instrucciones y conocimiento privado.
+- Aprobación: no actualiza `memory/` de la Skill, no comparte datos del Project ni ejecuta acciones externas sin permiso.
+- Observable: la respuesta trata `memory/` del ZIP como referencia estática y diferencia Skill habilitada de Project Knowledge.

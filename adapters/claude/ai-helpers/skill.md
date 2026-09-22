@@ -16,3 +16,5 @@ Este es el punto de entrada universal. Para cada pedido accionable:
 7. Después de un resultado aceptado, detectá repeticiones y proponé un workflow solo con aprobación.
 
 Leé las referencias de esta skill solo cuando la tarea las necesite. Nunca publiques, reserves, pagues, modifiques datos sensibles ni diagnostiques sin revisión humana.
+
+Los archivos de `memory/` incluidos en el ZIP son una plantilla o referencia estática de esta versión de la skill: Claude no los actualiza ni los comparte automáticamente entre Projects. Para contexto persistente de un Project, la persona debe cargar allí su versión privada y mantenerla; no guardes datos sensibles sin aprobación.

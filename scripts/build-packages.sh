@@ -8,8 +8,8 @@ PROFILE_SKILLS=(profile-pm profile-design profile-developer profile-accounting p
 PROFILES=(general pm diseno desarrollo contabilidad psicologia)
 
 rm -rf "$BUILD"
-mkdir -p "$BUILD" "$ROOT/dist/claude" "$ROOT/dist/gemini" "$ROOT/dist/universal"
-rm -f "$ROOT"/dist/claude/*.zip "$ROOT"/dist/gemini/*.zip "$ROOT"/dist/universal/*.zip
+mkdir -p "$BUILD" "$ROOT/dist/claude" "$ROOT/dist/gemini" "$ROOT/dist/universal" "$ROOT/dist/chatgpt"
+rm -f "$ROOT"/dist/claude/*.zip "$ROOT"/dist/gemini/*.zip "$ROOT"/dist/universal/*.zip "$ROOT"/dist/chatgpt/*.md
 
 copy_skills() {
   local dest="$1"
@@ -63,6 +63,21 @@ make_zip() {
   (cd "$parent" && zip -qr "$output" "$folder")
 }
 
+make_chatgpt() {
+  local profile="$1"
+  local label="$profile"
+  local output="$ROOT/dist/chatgpt/ai-helpers-$profile.md"
+  case "$profile" in
+    general) label="general" ;;
+    pm) label="PM" ;;
+    diseno) label="diseño" ;;
+    desarrollo) label="desarrollo" ;;
+    contabilidad) label="contabilidad" ;;
+    psicologia) label="psicología" ;;
+  esac
+  sed "s/Perfil base: general\./Perfil base: $label./" "$ROOT/adapters/chatgpt/CUSTOM-INSTRUCTIONS.md" > "$output"
+}
+
 rm -rf "$ROOT/plugins/ai-helpers/skills"
 mkdir -p "$ROOT/plugins/ai-helpers/skills"
 copy_skills "$ROOT/plugins/ai-helpers/skills" general
@@ -71,7 +86,8 @@ for profile in "${PROFILES[@]}"; do
   make_zip claude "$profile"
   make_zip gemini "$profile"
   make_zip universal "$profile"
+  make_chatgpt "$profile"
 done
 
 rm -rf "$BUILD"
-echo "Built ${#PROFILES[@]} profile editions for Claude, Gemini, and universal import, plus the ChatGPT/Codex plugin skills."
+echo "Built ${#PROFILES[@]} profile editions for Claude, Gemini, universal, and ChatGPT, plus the Codex plugin skills."

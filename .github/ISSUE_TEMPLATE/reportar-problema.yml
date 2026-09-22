@@ -1,0 +1,33 @@
+name: Reportar problema
+description: Informar un error reproducible del paquete
+title: "[bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "No pegues secretos, datos personales ni contenido sensible."
+  - type: textarea
+    id: reproduccion
+    attributes:
+      label: Cómo reproducirlo
+      description: Pasos mínimos y entrada anonimizada.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Esperado y observado
+    validations:
+      required: true
+  - type: input
+    id: plataforma
+    attributes:
+      label: Plataforma y edición
+      placeholder: Claude / general, Pi, Copilot, etc.
+    validations:
+      required: true
+  - type: input
+    id: validacion
+    attributes:
+      label: Resultado de validación
+      placeholder: node scripts/validate-pack.mjs

@@ -1,0 +1,36 @@
+name: Nuevo workflow o skill
+description: Proponer una mejora reusable y anonimizada
+title: "[workflow] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: "No incluyas datos personales, credenciales, historias clínicas ni información de clientes."
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema y patrón repetido
+      description: ¿Qué tarea se repite y qué resultado querés estandarizar?
+    validations:
+      required: true
+  - type: textarea
+    id: entradas
+    attributes:
+      label: Entradas, decisiones y salida
+      description: Indicá datos necesarios, decisiones adaptativas, aprobaciones y formato final.
+    validations:
+      required: true
+  - type: input
+    id: perfiles
+    attributes:
+      label: Perfil y plataforma
+      placeholder: general / desarrollo / Claude, Pi, etc.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacidad
+    attributes:
+      label: Privacidad
+      options:
+        - label: Confirmo que eliminé datos privados y que la propuesta está anonimizada.
+          required: true

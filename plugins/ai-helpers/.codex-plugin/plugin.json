@@ -1,0 +1,18 @@
+{
+  "name": "ai-helpers",
+  "version": "0.1.0",
+  "description": "Ai Helpers plugin",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ai Helpers",
+    "shortDescription": "Use Ai Helpers in Codex.",
+    "longDescription": "Ai Helpers adds a local Codex plugin scaffold.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Help me use Ai Helpers."
+  }
+}
